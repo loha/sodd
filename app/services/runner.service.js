@@ -49,7 +49,7 @@ async function checkMEMUsage(site, requests) {
     `Site | ${site} | Requests maked | ${requests} | Free MEM | ${memUsage} | Time | ${new Date().getSeconds()}`
   );
 
-  if (canRun && memUsage > 1900) {
+  if (canRun && memUsage > 1500) {
     process.exit(1);
   }
 }
