@@ -50,7 +50,7 @@ async function checkMEMUsage(site, requests) {
   );
 
   if (canRun && memUsage > 1900) {
-    process.exit(0);
+    process.exit(1);
   }
 }
 
