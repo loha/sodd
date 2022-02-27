@@ -1,0 +1,14 @@
+{
+  "name": "sodd",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/loha/sodd.git",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  }
+}
