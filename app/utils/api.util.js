@@ -57,7 +57,6 @@ class RequestApi {
           });
 
           response.on('end', () => {
-            console.log('completed');
             resolve(this._getSuccessData(response, body));
           });
         })
