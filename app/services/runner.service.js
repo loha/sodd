@@ -3,7 +3,6 @@ const { currentMEMUsege } = require('../helpers/cpu.helper');
 const { sleep } = require('../helpers/sleep.helper');
 const { RequestApi } = require('../utils/api.util');
 
-console.log(NEXT_REQUEST_LOG, MAX_MEM_USE);
 async function start(sitesData) {
   for (const siteData of sitesData) {
     run(siteData);
