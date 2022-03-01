@@ -57,12 +57,10 @@ class RequestApi {
           });
 
           response.on('end', () => {
-            console.log(body);
             resolve(this._getSuccessData(response, body));
           });
         })
         .on('error', (error) => {
-          console.log(error);
           reject(error);
         });
 

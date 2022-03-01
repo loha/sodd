@@ -20,13 +20,13 @@ async function run(siteData) {
   const [hostname, path, port, method] = siteData.split('|');
 
   while (true) {
-    await new RequestApi()
+    new RequestApi()
       .options({
         hostname,
         // port,
         path,
         method,
-        timeout: 1000,
+        timeout: 5000,
       })
       .make()
       .catch((err) => err);
