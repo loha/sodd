@@ -1,7 +1,8 @@
 const { NEXT_REQUEST_LOG, MAX_MEM_USE } = require('../../config.settings');
 const { currentMEMUsege } = require('../helpers/cpu.helper');
-const { sleep } = require('../helpers/sleep.helper');
+// const { sleep } = require('../helpers/sleep.helper');
 const { RequestApi } = require('../utils/api.util');
+// const axios = require('axios');
 
 async function start(sitesData) {
   for (const siteData of sitesData) {
@@ -19,10 +20,10 @@ async function run(siteData) {
   const [hostname, path, port, method] = siteData.split('|');
 
   while (true) {
-    new RequestApi()
+    await new RequestApi()
       .options({
         hostname,
-        port,
+        // port,
         path,
         method,
         timeout: 1000,
